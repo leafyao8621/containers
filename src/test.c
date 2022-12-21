@@ -62,6 +62,19 @@ int main(void) {
             hashset.data[i].data
         );
     }
+    char *buf_hs_find[] = {
+        "abcd",
+        "adqwe124",
+        "adqwe1243",
+        "qwertttt123",
+        "adqwe1245"
+    };
+    for (size_t i = 0; i < 5; ++i) {
+        bool found = false;
+        ret = HashSetString_find(&hashset, &buf_hs_find[i], &found);
+        REPORT
+        printf("found: %hhd\n", found);
+    }
     ret = HashSetString_finalize(&hashset);
     REPORT
     return 0;

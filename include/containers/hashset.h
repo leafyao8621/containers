@@ -23,7 +23,7 @@ int HashSet##Type##_initialize(\
     size_t (*hash)(Type*));\
 int HashSet##Type##_finalize(HashSet##Type *hashset);\
 int HashSet##Type##_insert(HashSet##Type *hashset, Type *data);\
-int HashSet##Type##_find(HashSet##Type *hashset, bool *found);
+int HashSet##Type##_find(HashSet##Type *hashset, Type *data, bool *found);
 
 #define DEF_HASHSET_FUNCTIONS(Type)\
 int HashSet##Type##_initialize(\
@@ -87,6 +87,21 @@ int HashSet##Type##_insert(HashSet##Type *hashset, Type *data) {\
         hashset->data[idx].in_use = true;\
         hashset->data[idx].data = *data;\
     }\
+    return CONTAINERS_ERR_OK;\
+}\
+int HashSet##Type##_find(HashSet##Type *hashset, Type *data, bool *found) {\
+    if (!hashset || !found) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    size_t idx = hashset->hash(data) % hashset->capacity;\
+    size_t cnt = 0;\
+    for (\
+        ;\
+        cnt < hashset->capacity &&\
+        hashset->data[idx].in_use &&\
+        !hashset->eq(&hashset->data[idx].data, data);\
+        ++cnt, idx = (idx + 1) % hashset->capacity);\
+    *found = hashset->data[idx].in_use && cnt < hashset->capacity;\
     return CONTAINERS_ERR_OK;\
 }
 
