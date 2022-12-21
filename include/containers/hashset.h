@@ -31,7 +31,7 @@ int HashSet##Type##_initialize(\
     size_t capacity,\
     bool (*eq)(Type*, Type*),\
     size_t (*hash)(Type*)) {\
-    if (!hashset) {\
+    if (!hashset || !eq || !hash) {\
         return CONTAINERS_ERR_NULL_PTR;\
     }\
     hashset->size = 0;\
