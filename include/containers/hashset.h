@@ -79,8 +79,7 @@ int HashSet##Type##_insert(HashSet##Type *hashset, Type *data) {\
     size_t idx = hashset->hash(data) % hashset->capacity;\
     for (\
         ;\
-        hashset->data[idx].in_use &&\
-        !hashset->eq(&hashset->data[idx].data, data);\
+        hashset->data[idx].in_use;\
         idx = (idx + 1) % hashset->capacity);\
     if (!hashset->data[idx].in_use) {\
         ++hashset->size;\
