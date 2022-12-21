@@ -6,7 +6,7 @@ BIN = test
 CFLAGS = -Wall -Wextra -Werror -pedantic -fPIC
 
 %.o: %.c
-	$(CC) $(CFLAGS) -Iinclude -g -c $< -o $@
+	$(CC) $(CFLAGS) -Iinclude -O3 -c $< -o $@
 
 $(LIB): $(OBJ)
 	$(CC) $(OBJ) -shared -o $(LIB)
