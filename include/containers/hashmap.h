@@ -87,10 +87,8 @@ int HashMap##Key##Value##_fetch(\
         hashmap->data = buf;\
     }\
     size_t idx = hashmap->hash(key) % hashmap->capacity;\
-    size_t cnt = 0;\
     for (\
         ;\
-        cnt < hashmap->capacity &&\
         hashmap->data[idx].in_use &&\
         !hashmap->eq(&hashmap->data[idx].key, key);\
         idx = (idx + 1) % hashmap->capacity);\
@@ -100,6 +98,24 @@ int HashMap##Key##Value##_fetch(\
         hashmap->data[idx].key = *key;\
     }\
     *value = &hashmap->data[idx].value;\
+    return CONTAINERS_ERR_OK;\
+}\
+int HashMap##Key##Value##_find(\
+    HashMap##Key##Value *hashmap,\
+    Key *key,\
+    bool *found) {\
+    if (!hashmap || !key || !found) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    size_t idx = hashmap->hash(key) % hashmap->capacity;\
+    size_t cnt = 0;\
+    for (\
+        ;\
+        cnt < hashmap->capacity &&\
+        hashmap->data[idx].in_use &&\
+        !hashmap->eq(&hashmap->data[idx].key, key);\
+        ++cnt, idx = (idx + 1) % hashmap->capacity);\
+    *found = hashmap->data[idx].in_use && cnt < hashmap->capacity;\
     return CONTAINERS_ERR_OK;\
 }
 

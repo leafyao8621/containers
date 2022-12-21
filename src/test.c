@@ -114,12 +114,12 @@ int main(void) {
             hashmap.data[i].value
         );
     }
-    // for (size_t i = 0; i < 5; ++i) {
-    //     bool found = false;
-    //     ret = HashMapStringInt_find(&hashmap, &buf_hs_find[i], &found);
-    //     REPORT
-    //     printf("found: %hhd\n", found);
-    // }
+    for (size_t i = 0; i < 6; ++i) {
+        bool found = false;
+        ret = HashMapStringInt_find(&hashmap, &buf_hs_find[i], &found);
+        REPORT
+        printf("found: %hhd\n", found);
+    }
     ret = HashMapStringInt_finalize(&hashmap);
     REPORT
     return 0;
