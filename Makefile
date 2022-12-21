@@ -20,5 +20,5 @@ clean:
 	@rm $(LIB)
 	@rm $(BIN)
 install:
-	@cp -r include/containers /home/leaf/.local/include
-	@cp $(LIB) /home/leaf/.local/lib
+	@cp -r include/containers ~/.local/include
+	@cp $(LIB) ~/.local/lib
