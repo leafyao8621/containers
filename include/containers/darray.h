@@ -17,7 +17,9 @@ int DArray##Type##_push_back(DArray##Type *darray, Type *item);\
 int DArray##Type##_push_back_batch(\
     DArray##Type *darray,\
     Type *items,\
-    size_t len);
+    size_t len);\
+int DArray##Type##_pop_back(DArray##Type *darray);\
+int DArray##Type##_clear(DArray##Type *darray);
 
 #define DEF_DARRAY_FUNCTIONS(Type)\
 int DArray##Type##_initialize(DArray##Type *darray, size_t capacity) {\
@@ -69,6 +71,23 @@ int DArray##Type##_push_back_batch(\
     }\
     memcpy(darray->data + darray->size, items, sizeof(Type) * len);\
     darray->size += len;\
+    return CONTAINERS_ERR_OK;\
+}\
+int DArray##Type##_pop_back(DArray##Type *darray) {\
+    if (!darray) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    if (!darray->size) {\
+        return CONTAINERS_ERR_EMPTY;\
+    }\
+    --darray->size;\
+    return CONTAINERS_ERR_OK;\
+}\
+int DArray##Type##_clear(DArray##Type *darray) {\
+    if (!darray) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    darray->size = 0;\
     return CONTAINERS_ERR_OK;\
 }
 
