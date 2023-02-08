@@ -7,18 +7,18 @@
 
 #define REPORT printf("%d %s\n", ret, containers_errcode_lookup[ret]);
 
-typedef char *String;
+typedef char *SString;
 typedef int Int;
-DEF_DARRAY(String)
-DEF_DARRAY_FUNCTIONS(String)
-DEF_HASHSET(String)
-DEF_HASHSET_FUNCTIONS(String)
-DEF_HASHMAP(String, Int)
-DEF_HASHMAP_FUNCTIONS(String, Int)
+DEF_DARRAY(SString)
+DEF_DARRAY_FUNCTIONS(SString)
+DEF_HASHSET(SString)
+DEF_HASHSET_FUNCTIONS(SString)
+DEF_HASHMAP(SString, Int)
+DEF_HASHMAP_FUNCTIONS(SString, Int)
 
 int main(void) {
-    DArrayString darray;
-    int ret = DArrayString_initialize(&darray, 2);
+    DArraySString darray;
+    int ret = DArraySString_initialize(&darray, 2);
     REPORT
     char *buf[] = {
         "0",
@@ -28,16 +28,16 @@ int main(void) {
         "4"
     };
     for (int i = 0; i < 5; ++i) {
-        ret = DArrayString_push_back(&darray, buf + i);
+        ret = DArraySString_push_back(&darray, buf + i);
         REPORT
     }
-    ret = DArrayString_push_back_batch(&darray, buf, 5);
+    ret = DArraySString_push_back_batch(&darray, buf, 5);
     REPORT
     printf("%lu %lu\n", darray.size, darray.capacity);
     for (int i = 0; i < 10; ++i) {
         printf("%s\n", darray.data[i]);
     }
-    ret = DArrayString_finalize(&darray);
+    ret = DArraySString_finalize(&darray);
     REPORT
     char *buf_hs[] = {
         "abcde",
@@ -47,9 +47,9 @@ int main(void) {
         "adqwe1245",
         "xxhsaklfjsalfksadljklasd"
     };
-    HashSetString hashset;
+    HashSetSString hashset;
     ret =
-        HashSetString_initialize(
+        HashSetSString_initialize(
             &hashset,
             2,
             containers_eq_str,
@@ -57,7 +57,7 @@ int main(void) {
         );
     REPORT
     for (int i = 0; i < 6; ++i) {
-        ret = HashSetString_insert(&hashset, buf_hs + i);
+        ret = HashSetSString_insert(&hashset, buf_hs + i);
         REPORT
     }
     for (size_t i = 0; i < hashset.capacity; ++i) {
@@ -77,11 +77,11 @@ int main(void) {
     };
     for (size_t i = 0; i < 6; ++i) {
         bool found = false;
-        ret = HashSetString_find(&hashset, &buf_hs_find[i], &found);
+        ret = HashSetSString_find(&hashset, &buf_hs_find[i], &found);
         REPORT
         printf("found: %hhd\n", found);
     }
-    ret = HashSetString_finalize(&hashset);
+    ret = HashSetSString_finalize(&hashset);
     REPORT
     int buf_val[] = {
         0,
@@ -91,9 +91,9 @@ int main(void) {
         4,
         5
     };
-    HashMapStringInt hashmap;
+    HashMapSStringInt hashmap;
     ret =
-        HashMapStringInt_initialize(
+        HashMapSStringInt_initialize(
             &hashmap,
             2,
             containers_eq_str,
@@ -102,7 +102,7 @@ int main(void) {
     REPORT
     for (int i = 0; i < 6; ++i) {
         int *res = 0;
-        ret = HashMapStringInt_fetch(&hashmap, buf_hs + i, &res);
+        ret = HashMapSStringInt_fetch(&hashmap, buf_hs + i, &res);
         REPORT
         *res = buf_val[i];
     }
@@ -116,11 +116,11 @@ int main(void) {
     }
     for (size_t i = 0; i < 6; ++i) {
         bool found = false;
-        ret = HashMapStringInt_find(&hashmap, &buf_hs_find[i], &found);
+        ret = HashMapSStringInt_find(&hashmap, &buf_hs_find[i], &found);
         REPORT
         printf("found: %hhd\n", found);
     }
-    ret = HashMapStringInt_finalize(&hashmap);
+    ret = HashMapSStringInt_finalize(&hashmap);
     REPORT
     return 0;
 }

@@ -1,4 +1,3 @@
-#include <containers/dstring.h>
 #include <containers/hash.h>
 
 DEF_DARRAY_FUNCTIONS(Char)

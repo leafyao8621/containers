@@ -5,7 +5,10 @@
 #include <stdint.h>
 #include <string.h>
 
+#include <containers/dstring.h>
+
 bool containers_eq_str(char **a, char **b);
+bool containers_eq_dstr(String *a, String *b);
 bool containers_eq_int8(int8_t *a, int8_t *b);
 bool containers_eq_uint8(uint8_t *a, uint8_t *b);
 bool containers_eq_int16(int16_t *a, int16_t *b);

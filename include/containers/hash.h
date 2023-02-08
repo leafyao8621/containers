@@ -5,7 +5,10 @@
 #include <stdint.h>
 #include <string.h>
 
+#include <containers/dstring.h>
+
 size_t containers_hash_str(char **a);
+size_t containers_hash_dstr(String *a);
 size_t containers_hash_int8(int8_t *a);
 size_t containers_hash_uint8(uint8_t *a);
 size_t containers_hash_int16(int16_t *a);

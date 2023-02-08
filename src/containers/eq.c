@@ -1,4 +1,3 @@
-#include <containers/dstring.h>
 #include <containers/eq.h>
 
 bool containers_eq_str(char **a, char **b) {
