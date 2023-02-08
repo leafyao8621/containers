@@ -1,4 +1,7 @@
+#include <containers/dstring.h>
 #include <containers/hash.h>
+
+DEF_DARRAY_FUNCTIONS(Char)
 
 size_t containers_hash_str(char **a) {
     char buf[sizeof(size_t)] = {0};
@@ -14,6 +17,10 @@ size_t containers_hash_str(char **a) {
         out ^= *(size_t*)iter;
     }
     return out;
+}
+
+size_t containers_hash_dstr(String *a) {
+    return containers_hash_str(&a->data);
 }
 
 size_t containers_hash_int8(int8_t *a) {

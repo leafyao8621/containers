@@ -1,7 +1,12 @@
+#include <containers/dstring.h>
 #include <containers/eq.h>
 
 bool containers_eq_str(char **a, char **b) {
     return !strcmp(*a, *b);
+}
+
+bool containers_eq_dstr(String *a, String *b) {
+    return containers_eq_str(&a->data, &b->data);
 }
 
 bool containers_eq_int8(int8_t *a, int8_t *b) {
