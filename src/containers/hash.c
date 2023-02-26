@@ -1,7 +1,5 @@
 #include <containers/hash.h>
 
-DEF_DARRAY_FUNCTIONS(Char)
-
 size_t containers_hash_str(char **a) {
     char buf[sizeof(size_t)] = {0};
     size_t len = strlen(*a);
