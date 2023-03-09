@@ -17,7 +17,19 @@ size_t containers_hash_str(char **a) {
 }
 
 size_t containers_hash_dstr(String *a) {
-    return containers_hash_str(&a->data);
+    char buf[sizeof(size_t)] = {0};
+    size_t len = a->size;
+    if (len < sizeof(size_t)) {
+        memcpy(buf, a->data, len);
+        return *(size_t*)buf;
+    }
+    char *iter = a->data;
+    size_t out = *(size_t*)a;
+    ++iter;
+    for (size_t i = 1; i <= len - sizeof(size_t); ++i, ++iter) {
+        out ^= *(size_t*)iter;
+    }
+    return out;
 }
 
 size_t containers_hash_int8(int8_t *a) {

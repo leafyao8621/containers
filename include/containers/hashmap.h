@@ -104,18 +104,21 @@ int HashMap##Key##Value##_find(\
     HashMap##Key##Value *hashmap,\
     Key *key,\
     bool *found) {\
+    puts("shit");\
     if (!hashmap || !key || !found) {\
         return CONTAINERS_ERR_NULL_PTR;\
     }\
     size_t idx = hashmap->hash(key) % hashmap->capacity;\
     size_t cnt = 0;\
+    printf("hash %lx idx %lu\n", hashmap->hash(key), idx);\
     for (\
         ;\
         cnt < hashmap->capacity &&\
         hashmap->data[idx].in_use &&\
         !hashmap->eq(&hashmap->data[idx].key, key);\
         ++cnt, idx = (idx + 1) % hashmap->capacity);\
-    *found = hashmap->data[idx].in_use && cnt < hashmap->capacity;\
+    printf("idx %lu\n", idx);\
+    *found = hashmap->data[idx].in_use;\
     return CONTAINERS_ERR_OK;\
 }
 
