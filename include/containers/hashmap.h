@@ -115,7 +115,8 @@ int HashMap##Key##Value##_find(\
         hashmap->data[idx].in_use &&\
         !hashmap->eq(&hashmap->data[idx].key, key);\
         ++cnt, idx = (idx + 1) % hashmap->capacity);\
-    *found = hashmap->data[idx].in_use;\
+    *found =\
+        hashmap->data[idx].in_use && cnt < hashmap->capacity;\
     return CONTAINERS_ERR_OK;\
 }
 
