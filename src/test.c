@@ -2,6 +2,7 @@
 #include <containers/darray.h>
 #include <containers/hashset.h>
 #include <containers/hashmap.h>
+#include <containers/list.h>
 #include <containers/eq.h>
 #include <containers/hash.h>
 
@@ -15,6 +16,8 @@ DEF_HASHSET(SString)
 DEF_HASHSET_FUNCTIONS(SString)
 DEF_HASHMAP(SString, Int)
 DEF_HASHMAP_FUNCTIONS(SString, Int)
+DEF_LIST(SString)
+DEF_LIST_FUNCTIONS(SString)
 
 int main(void) {
     DArraySString darray;
@@ -121,6 +124,22 @@ int main(void) {
         printf("found: %hhd\n", found);
     }
     ret = HashMapSStringInt_finalize(&hashmap);
+    REPORT
+    ListSString list;
+    ret = ListSString_initialize(&list, NULL);
+    REPORT
+    for (int i = 0; i < 5; ++i) {
+        ret = ListSString_push_back(&list, buf + i);
+        REPORT
+    }
+    printf("size: %lu\n", list.size);
+    for (ListSStringNode *i = list.head; i; i = i->next) {
+        printf("%s\n", i->data);
+    }
+    for (ListSStringNode *i = list.tail; i; i = i->prev) {
+        printf("%s\n", i->data);
+    }
+    ret = ListSString_finalize(&list);
     REPORT
     return 0;
 }

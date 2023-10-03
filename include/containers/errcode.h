@@ -5,7 +5,8 @@
 #define CONTAINERS_ERR_NULL_PTR 1
 #define CONTAINERS_ERR_INSUFFICIENT_MEMORY 2
 #define CONTAINERS_ERR_EMPTY 3
+#define CONTAINERS_ERR_FINALIZER 4
 
-extern const char *containers_errcode_lookup[4];
+extern const char *containers_errcode_lookup[5];
 
 #endif
