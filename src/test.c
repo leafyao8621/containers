@@ -139,6 +139,40 @@ int main(void) {
     for (ListSStringNode *i = list.tail; i; i = i->prev) {
         printf("%s\n", i->data);
     }
+    for (int i = 0; i < 6; ++i) {
+        ret = ListSString_pop_back(&list);
+        REPORT
+    }
+    for (int i = 0; i < 5; ++i) {
+        ret = ListSString_push_back(&list, buf + i);
+        REPORT
+    }
+    for (ListSStringNode *i = list.head; i; i = i->next) {
+        printf("%s\n", i->data);
+    }
+    for (ListSStringNode *i = list.tail; i; i = i->prev) {
+        printf("%s\n", i->data);
+    }
+    for (int i = 0; i < 3; ++i) {
+        ret = ListSString_pop_back(&list);
+        REPORT
+    }
+    for (ListSStringNode *i = list.head; i; i = i->next) {
+        printf("%s\n", i->data);
+    }
+    for (ListSStringNode *i = list.tail; i; i = i->prev) {
+        printf("%s\n", i->data);
+    }
+     for (int i = 0; i < 5; ++i) {
+        ret = ListSString_push_back(&list, buf + i);
+        REPORT
+    }
+    for (ListSStringNode *i = list.head; i; i = i->next) {
+        printf("%s\n", i->data);
+    }
+    for (ListSStringNode *i = list.tail; i; i = i->prev) {
+        printf("%s\n", i->data);
+    }
     ret = ListSString_finalize(&list);
     REPORT
     return 0;

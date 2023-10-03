@@ -80,7 +80,9 @@ int List##Type##_pop_back(List##Type *list) {\
     if (list->finalizer) {\
         list->finalizer(&list->tail->data);\
     }\
+    List##Type##Node *temp = list->tail;\
     list->tail = list->tail->prev;\
+    free(temp);\
     if (list->tail) {\
         list->tail->next = NULL;\
     } else {\
