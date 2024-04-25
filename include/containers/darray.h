@@ -19,6 +19,7 @@ int DArray##Type##_push_back_batch(\
     Type *items,\
     size_t len);\
 int DArray##Type##_pop_back(DArray##Type *darray);\
+int DArray##Type##_pop_back_batch(DArray##Type *darray, size_t len);\
 int DArray##Type##_clear(DArray##Type *darray);\
 int DArray##Type##_expand(DArray##Type *darrya, size_t len, bool zero);
 
@@ -79,6 +80,16 @@ int DArray##Type##_pop_back(DArray##Type *darray) {\
         return CONTAINERS_ERR_NULL_PTR;\
     }\
     if (!darray->size) {\
+        return CONTAINERS_ERR_EMPTY;\
+    }\
+    --darray->size;\
+    return CONTAINERS_ERR_OK;\
+}\
+int DArray##Type##_pop_back_batch(DArray##Type *darray, size_t len) {\
+    if (!darray) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    if (darray->size < len) {\
         return CONTAINERS_ERR_EMPTY;\
     }\
     --darray->size;\
