@@ -40,6 +40,18 @@ int main(void) {
     for (int i = 0; i < 10; ++i) {
         printf("%s\n", darray.data[i]);
     }
+    ret = DArraySString_expand(&darray, 2, true);
+    REPORT
+    printf("%lu %lu\n", darray.size, darray.capacity);
+    for (int i = 0; i < 12; ++i) {
+        printf("%p\n", darray.data[i]);
+    }
+    ret = DArraySString_expand(&darray, 2, false);
+    REPORT
+    printf("%lu %lu\n", darray.size, darray.capacity);
+    for (int i = 0; i < 14; ++i) {
+        printf("%p\n", darray.data[i]);
+    }
     ret = DArraySString_finalize(&darray);
     REPORT
     char *buf_hs[] = {

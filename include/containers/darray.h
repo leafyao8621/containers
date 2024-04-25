@@ -89,6 +89,26 @@ int DArray##Type##_clear(DArray##Type *darray) {\
     }\
     darray->size = 0;\
     return CONTAINERS_ERR_OK;\
-}
+}\
+int DArray##Type##_expand(\
+    DArray##Type *darray,\
+    size_t len,\
+    bool zero) {\
+    if (!darray) {\
+        return CONTAINERS_ERR_NULL_PTR;\
+    }\
+    if (darray->size + len > darray->capacity) {\
+        darray->capacity = darray->size + len;\
+        darray->data = realloc(darray->data, sizeof(Type) * darray->capacity);\
+        if (!darray->data) {\
+            return CONTAINERS_ERR_INSUFFICIENT_MEMORY;\
+        }\
+    }\
+    if (zero) {\
+        memset(darray->data + darray->size, 0, len);\
+    }\
+    darray->size += len;\
+    return CONTAINERS_ERR_OK;\
+}\
 
 #endif
