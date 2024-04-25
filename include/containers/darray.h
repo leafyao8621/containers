@@ -20,7 +20,7 @@ int DArray##Type##_push_back_batch(\
     size_t len);\
 int DArray##Type##_pop_back(DArray##Type *darray);\
 int DArray##Type##_clear(DArray##Type *darray);\
-int Darray##Type##_expand(DArray##Type *darrya, size_t len, bool zero);
+int DArray##Type##_expand(DArray##Type *darrya, size_t len, bool zero);
 
 #define DEF_DARRAY_FUNCTIONS(Type)\
 int DArray##Type##_initialize(DArray##Type *darray, size_t capacity) {\
