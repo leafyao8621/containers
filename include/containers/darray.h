@@ -92,7 +92,7 @@ int DArray##Type##_pop_back_batch(DArray##Type *darray, size_t len) {\
     if (darray->size < len) {\
         return CONTAINERS_ERR_EMPTY;\
     }\
-    --darray->size;\
+    darray->size -= len;\
     return CONTAINERS_ERR_OK;\
 }\
 int DArray##Type##_clear(DArray##Type *darray) {\
